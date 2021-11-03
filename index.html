@@ -1,0 +1,1071 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Workshop de Criptografia</title>
+
+        <link rel="stylesheet" href="reveal.js/dist/reset.css">
+        <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="reveal.js/dist/theme/white.css">
+        <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/github-dark-dimmed.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/app.css">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>Workshop de Criptografia</h1>
+                </section>
+
+                <!-- Criptografia é -->
+                <section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h2>Criptografia</h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia</h2>
+                        <blockquote>
+                            a prática e o estudo de técnicas para comunicação segura na presença de terceiros
+                        </blockquote>
+                        <blockquote class="fragment">
+                            a construção e análise de protocolos que previnam terceiros de ler mensagens privadas
+                        </blockquote>
+                        <a href="https://pt.wikipedia.org/wiki/Criptografia" target="_blank" rel="noopener"
+                           class="fragment small">
+                            Wikipedia
+                        </a>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia é...</h2>
+                        <div class="d-flex align-start">
+                            <div class="block fragment flex-grow text-center" data-fragment-index="0">
+                                Texto plano
+                            </div>
+                            <div id="flow-cipher" class="fragment flex-grow" data-fragment-index="1">
+                                <div class="r-stack">
+                                    <span class="fragment fade-out" data-fragment-index="4">&rarr;</span>
+                                    <span class="fragment" data-fragment-index="4">&larr;</span><br>
+                                </div>
+                                <div class="r-stack">
+                                    <small class="smaller fragment fade-in-then-out" data-fragment-index="3">
+                                        Encriptação
+                                    </small>
+                                    <small class="smaller fragment" data-fragment-index="4">
+                                        Decriptação
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="block r-stack fragment flex-grow" data-fragment-index="2">
+                                <code class="fragment plain fade-in-then-out" data-fragment-index="2">
+                                    Texto cifrado
+                                </code>
+                                <code class="fragment fade-up plain" data-fragment-index="3">
+                                    42a14c854faed
+                                </code>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Criptografia</span>
+                            Objetivos principais
+                        </h3>
+                        <div class="d-flex">
+                            <div class="flex-grow">
+                                <h6 class="fragment" data-fragment-index="0">Confidencialidade</h6>
+                                <blockquote class="fragment small" data-fragment-index="2">
+                                    só o destinatário autorizado deve ser capaz de extrair o conteúdo da mensagem da sua
+                                    forma cifrada
+                                </blockquote>
+                                <br>
+                                <h6 class="fragment" data-fragment-index="0">Integridade</h6>
+                                <blockquote class="fragment small" data-fragment-index="3">
+                                    o destinatário deverá ser capaz de verificar se a mensagem foi alterada durante a
+                                    transmissão
+                                </blockquote>
+                            </div>
+                            <div class="flex-grow">
+                                <h6 class="fragment" data-fragment-index="0">Autenticidade</h6>
+                                <blockquote class="fragment small" data-fragment-index="4">
+                                    o destinatário deverá ser capaz de verificar que se o remetente é realmente quem diz
+                                    ser
+                                </blockquote>
+                                <br>
+                                <h6 class="fragment" data-fragment-index="1">Não-repúdio</h6>
+                                <blockquote class="fragment small" data-fragment-index="5">
+                                    não deverá ser possível ao remetente negar a autoria de sua mensagem
+                                </blockquote>
+                            </div>
+                        </div>
+                        <a href="https://pt.wikipedia.org/wiki/Criptografia#Vis%C3%A3o_geral:_objetivos"
+                           target="_blank" rel="noopener" class="fragment small" data-fragment-index="6">
+                            Wikipedia
+                        </a>
+                    </section>
+                </section>
+                <!-- Criptografia é -->
+
+                <!-- Criptografia Simétrica -->
+                <section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h2>Criptografia Simétrica</h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia Simétrica</h2>
+                        <p class="fragment">
+                            Usa a mesma chave para os dois processos
+                        </p>
+                        <p class="fragment">Portanto, essa chave deve permanecer <b>secreta</b></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia Simétrica</h2>
+                        <div class="d-flex half-columns">
+                            <div class="fragment">
+                                <h4>Cifras de Bloco</h4>
+                                <p>Operam com tamanho fixos de blocos de informação</p>
+                            </div>
+                            <div class="fragment">
+                                <h4>Cifras de Fluxo</h4>
+                                <p>Trabalham com qualquer <em>stream</em> de bits</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h5>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Algoritmos mais comuns
+                        </h5>
+                        <div class="d-flex half-columns line-height-1 my-2">
+                            <div class="fragment">
+                                Blowfish<br>
+                                <span class="small">deve-se usar os algoritmos relacionados
+                                Twofish and Threefish, por serem mais seguros</span>
+                            </div>
+                            <div class="fragment">
+                                DES<br><em class="small">Data Encryption Standard</em><br>
+                                <span class="small">que não deve ser
+                                usado mais (e nem o seu successor Triple DES)</span>
+                            </div>
+                        </div>
+                        <div class="d-flex half-columns line-height-1 justify-content-center">
+                            <div class="fragment">
+                                AES<br><em class="small">Advanced Encryption Standard</em><br>
+                                <span class="small">também
+                                conhecido pelo seu nome original Rijndael, foi aprovado pelo NSA para encriptar
+                                informações confidenciais e é o mais recomendado</span>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h5>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Modos de Operação
+                        </h5>
+                        <p>Processo que será responsável por executar a cifra em cada um dos blocos</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h5>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Modos de Operação
+                        </h5>
+                        <p>
+                            O <b>Vetor de Inicialização (IV)</b> é um valor aleatório responsável por oferecer o estado
+                            inicial ao algoritmo e não pode ser reutilizado ou previsível
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h5>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Modos de Operação
+                        </h5>
+                        <p>Principais algoritmos</p>
+                        <ul>
+                            <li>Electronic codebook (ECB)</li>
+                            <li>Cipher block chaining (CBC)</li>
+                            <li>Cipher feedback (CFB)</li>
+                            <li>Counter (CTR)</li>
+                            <li>Galois/counter mode (GCM)</li>
+                            <li>Counter with cipher block chaining MAC (CCM)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h6>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Por que não: Electronic codebook (ECB)
+                        </h6>
+                        <div class="r-stack">
+                            <img class="fragment" src="img/ecb.jpg" style="max-height: 500px" data-fragment-index="0">
+                            <img class="fragment" src="img/ecb_original.jpg" style="max-height: 500px"
+                                 data-fragment-index="1">
+                        </div>
+                        <div class="text-center mb-0">
+                            <a href="https://www.pngpix.com/download/giraffe-png-transparent-image" target="_blank"
+                               rel="noopener"
+                               class="fragment smallest" data-fragment-index="1">
+                                pngpix.com
+                            </a>
+                        </div>
+                    </section>
+                    <section>
+                        <h6>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Por que não: CBC, CFB e CTR
+                        </h6>
+                        <p>Não oferecem integridade e autenticidade</p>
+                        <p class="fragment">Ou seja, não é possível saber se alguém alterou ou forjou a mensagem</p>
+                        <p class="fragment">Iremos saber mais ao falar de hashing</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h5>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Modos de Operação
+                        </h5>
+                        <p>Algoritmos</p>
+                        <ul>
+                            <li class="fragment highlight-strikethrough" data-fragment-index="0">Electronic codebook (ECB)</li>
+                            <li class="fragment highlight-strikethrough" data-fragment-index="1">Cipher block chaining (CBC)</li>
+                            <li class="fragment highlight-strikethrough" data-fragment-index="1">Cipher feedback (CFB)</li>
+                            <li class="fragment highlight-strikethrough" data-fragment-index="1">Counter (CTR)</li>
+                            <li>Galois/counter (GCM)</li>
+                            <li>Counter with cipher block chaining MAC (CCM)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h6>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Exemplo: GCM
+                        </h6>
+                        <pre><code data-trim data-line-numbers class="php">
+                            $iv = random_bytes(
+                                openssl_cipher_iv_length('aes-256-gcm')
+                            );
+
+                            $ciphertext = openssl_encrypt(
+                                $data,             // plaintext
+                                'aes-256-gcm',     // cipher
+                                $key,              // key
+                                OPENSSL_RAW_DATA,  // flags
+                                $iv,               // iv (nonce)
+                                $tag,              // tag
+                                $aad,              // AAD
+                                16                 // tag length
+                            );
+
+                            $message = base64_encode($iv . $tag . $ciphertext);
+                        </code></pre>
+                        <p>PHP</p>
+                    </section>
+                    <section>
+                        <h6>
+                            <span>Criptografia Simétrica &#8250; Cifras de Bloco</span>
+                            Exemplo: GCM
+                        </h6>
+                        <pre><code data-trim data-line-numbers class="javascript">
+                            const { readFileSync } = require('fs');
+                            const { createCipheriv, randomBytes } = require('crypto');
+
+                            const key = readFileSync('app.key').toString().trim();
+                            const nonce = randomBytes(12);
+
+                            const cipher = createCipheriv('aes-256-gcm', key, nonce, {
+                                authTagLength: 16
+                            });
+                            const ciphertext = cipher.update(plaintext, 'utf8');
+                            cipher.final();
+                            const tag = cipher.getAuthTag();
+
+                            const message = Buffer
+                                .concat([nonce, tag, ciphertext])
+                                .toString('hex');
+                        </code></pre>
+                        <a href="scripts/node/symmetric/node-gcm-encrypt.js" class="smallest">
+                            <code>scripts/node/symmetric/node-gcm-encrypt.js</code>
+                        </a>
+                    </section>
+
+                    <section>
+                        <h4>
+                            <span>Criptografia Simétrica</span>
+                            Cifras de Fluxo
+                        </h4>
+                        <p>Indicadas quando não se sabe o tamanho do dado</p>
+                        <div class="d-flex half-columns line-height-1 my-2">
+                            <div class="fragment">
+                                A5/1<br>
+                                <span class="small">usada no padrão GSM para comunicação móvel</span>
+                            </div>
+                            <div class="fragment">
+                                RC4<br>
+                                <span class="small">usada no protocolo WEP para redes wireless</span>
+                            </div>
+                        </div>
+                        <div class="d-flex half-columns line-height-1 justify-content-center">
+                            <div class="fragment">
+                                ChaCha<br>
+                                <span class="small">a mais recomendada para uso hoje em dia</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Simétrica</span>
+                            Onde armazenar a chave?
+                        </h4>
+                        <p>
+                            Melhor opção é usar solução de <b>hardware</b>, mas pode ser caro e não estar disponível na
+                            infraestrutura
+                        </p>
+                        <p>Exemplos: HSM <em>(Hardware Security Module)</em> e TPM <em>(Trusted Platform Module)</em>
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Simétrica</span>
+                            Onde armazenar a chave?
+                        </h4>
+                        <p>Serviços do seu provedor de Cloud</p>
+                        <p>Exemplos: <em>AWS Key Management Service</em> e <em>Google Cloud Key Management</em></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Simétrica</span>
+                            Onde armazenar a chave?
+                        </h4>
+                        <p>Para Kubernetes ou Swarm, checar as features de <em>Secrets</em>
+                        <p class="smaller">
+                            PS: o Kubernetes não criptografa os dados por padrão, então siga o artigo
+                            <a href="https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/" target="_blank"
+                               rel="noopener">Encrypting Secret Data at Rest</a>
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Simétrica</span>
+                            Onde armazenar a chave?
+                        </h4>
+                        <p>
+                            <a href="https://git-secret.io/" target="_blank" rel="noopener">git-secret</a> também é uma
+                            alternativa e acompanha o versionamento do seu código
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Simétrica</span>
+                            Onde armazenar a chave?
+                        </h4>
+                        <p>
+                            Dependendo da criticidade da aplicação, você pode dividir a chave e colocar cada parte em
+                            uma localização diferente
+                        </p>
+                    </section>
+                </section>
+                <!-- Criptografia Simétrica -->
+
+                <!-- Criptografia Assimétrica -->
+                <section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h2>Criptografia Assimétrica</h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia Assimétrica</h2>
+                        <p class="fragment mb-1" data-fragment-index="0">
+                            Utiliza duas chaves, sendo cada uma responsável por um dos processos
+                        </p>
+                        <div class="d-flex half-columns text-center">
+                            <div>
+                                <h5 class="fragment" data-fragment-index="1">Chave Pública</h5>
+                                <p class="fragment" data-fragment-index="3">Pode ser distribuída para outros</p>
+                            </div>
+                            <div>
+                                <h5 class="fragment" data-fragment-index="2">Chave Privada</h5>
+                                <p class="fragment" data-fragment-index="4">Deve permanecer com o portador</p>
+                            </div>
+                        </div>
+                        <p class="fragment">Também conhecida como <strong>Criptografia de chave pública</strong></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia Assimétrica</h2>
+                        <p class="mb-1">Se você quer que terceiros se comuniquem com você...</p>
+                        <div class="d-flex half-columns text-center">
+                            <div>
+                                <h5>Chave Pública</h5>
+                                <p class="fragment" data-fragment-index="0">Usada por eles para escrevem para você</p>
+                                <p class="fragment" data-fragment-index="2">
+                                    &darr;<br>
+                                    Encriptação
+                                </p>
+                            </div>
+                            <div>
+                                <h5>Chave Privada</h5>
+                                <p class="fragment" data-fragment-index="1">Usada por você para ler o texto recebido</p>
+                                <p class="fragment" data-fragment-index="2">
+                                    &darr;<br>
+                                    Decriptação
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Criptografia Assimétrica</h2>
+                        <p class="mb-1">Se você quiser se comunicar com outros...</p>
+                        <div class="d-flex half-columns text-center">
+                            <div>
+                                <h5>Chave Pública</h5>
+                                <p class="fragment" data-fragment-index="1">
+                                    Usada por eles para verificar se o texto realmente veio de você
+                                </p>
+                                <p class="fragment" data-fragment-index="2">
+                                    &darr;<br>
+                                    Decriptação
+                                </p>
+                            </div>
+                            <div>
+                                <h5>Chave Privada</h5>
+                                <p class="fragment" data-fragment-index="0">
+                                    Usada por você para escrever textos
+                                </p>
+                                <p class="fragment" data-fragment-index="2">
+                                    &darr;<br>
+                                    Encriptação
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Mas como pode uma chave ser usada para ler e outra para escrever?
+                        </h4>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Mas como pode uma chave ser usada para ler e outra para escrever?
+                        </h4>
+                        <p>
+                            O <b>RSA</b>, algoritmo bastante conhecido, depende de números semi-primos <em>(que são
+                            aqueles com exatamente dois números primos como fatores)</em> muito grandes
+                        </p>
+                        <p>
+                            A segurança desse algoritmo consiste na dificuldade computacional em fatorar esses
+                            números
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Mas como pode uma chave ser usada para ler e outra para escrever?
+                        </h4>
+                        <p>
+                            Outros algoritmos <em>(como ED25519)</em> são baseados em curvas elípticas: pontos
+                            gerados por equações cúbicas como <code>y² = x³ + ax + b</code>
+                        </p>
+                        <p>Nesses casos, o cálculo do logaritmo discreto ainda é muito custoso computacionalmente</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Mas como pode uma chave ser usada para ler e outra para escrever?
+                        </h4>
+                        <p>
+                            Em ambos os casos, a segurança se baseia no fato das operações reversas serem muito custosas
+                            com o poder computacional existente
+                        </p>
+                        <p class="fragment">
+                            Já existem estudos de criptografia pós-quântica para resistirem a ataques de computadores
+                            quânticos
+                        </p>
+                    </section>
+
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Abordagem híbrida
+                        </h4>
+                        <p>
+                            Na prática, por causa de limitações do tamanho do texto a ser cifrado em alguns algoritmos
+                            <em class="smaller">
+                                (como no RSA, que com chaves de 2048 bits só permite cifrar blocos de até 214 bytes)
+                            </em> e por serem mais lentos na maioria dos casos, o que geralmente acontece é:
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Abordagem híbrida
+                        </h4>
+                        <ol class="margin">
+                            <li>
+                                É gerada uma chave secreta <em class="smaller">(aleatória e única para a sessão)</em>;
+                            </li>
+                            <li class="fragment">
+                                Usa-se Criptografia Simétrica para criptografar o texto plano;
+                            </li>
+                            <li class="fragment">
+                                Usa-se Criptografia Assimétrica para criptografar a chave gerada.
+                            </li>
+                        </ol>
+                    </section>
+
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Exemplo - RSA
+                        </h4>
+                        <pre><code class="javascript" data-line-numbers data-trim>
+                            const crypto = require('crypto');
+                            const publicKey = crypto.createPublicKey(
+                                fs.readFileSync('/path/to/public.key').toString()
+                            );
+
+                            const encryptedData = crypto.publicEncrypt(
+                                {
+                                    key: publicKey,
+                                    padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+                                    oaepHash: 'sha512',
+                                },
+                                Buffer.from(message)
+                            );
+
+                            console.log(encryptedData.toString('hex'));
+                        </code></pre>
+                        <a href="scripts/node/asymmetric/node-rsa-encrypt.js" class="smallest">
+                            <code>scripts/node/asymmetric/node-rsa-encrypt.js</code>
+                        </a>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Criptografia Assimétrica</span>
+                            Exemplo - RSA
+                        </h4>
+                        <pre><code class="javascript" data-line-numbers data-trim>
+                            const crypto = require('crypto');
+                            const privateKey = crypto.createPrivateKey(
+                                fs.readFileSync('/path/to/private.key').toString()
+                            );
+
+                            const decryptedData = crypto.privateDecrypt(
+                                {
+                                    key: privateKey,
+                                    padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+                                    oaepHash: 'sha512',
+                                },
+                                Buffer.from(message, 'hex')
+                            );
+
+                            console.log(decryptedData.toString);
+                        </code></pre>
+                        <a href="scripts/node/asymmetric/node-rsa-decrypt.js" class="smallest">
+                            <code>scripts/node/asymmetric/node-rsa-decrypt.js</code>
+                        </a>
+                    </section>
+                </section>
+                <!-- Criptografia Assimétrica -->
+
+                <!-- Hashing -->
+                <section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h2>Hashing</h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Hashing</h2>
+                        <blockquote class="fragment">
+                            é uma função que mapeia dados de tamanho arbitrário para dados de tamanho fixo
+                        </blockquote>
+                        <a href="https://en.wikipedia.org/wiki/Hash_function" target="_blank" rel="noopener"
+                           class="fragment small">
+                            Wikipedia
+                        </a>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Hashing</h2>
+                        <p>Os algoritmos mais comuns são:</p>
+                        <ul>
+                            <li>CRC</li>
+                            <li>MD5</li>
+                            <li>SHA-1</li>
+                            <li>SHA-256</li>
+                            <li>SHA-512</li>
+                            <li class="opacity-0">RIPEMD-160</li>
+                            <li class="opacity-0">Whirlpool</li>
+                            <li class="opacity-0">BLAKE3</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Hashing</h2>
+                        <p>Para fins de segurança, devemos optar por:</p>
+                        <ul>
+                            <li class="fragment highlight-strikethrough">CRC</li>
+                            <li class="fragment highlight-strikethrough">MD5</li>
+                            <li class="fragment highlight-strikethrough">SHA-1</li>
+                            <li>SHA-256</li>
+                            <li>SHA-512</li>
+                            <li class="fragment">RIPEMD-160</li>
+                            <li class="fragment">Whirlpool</li>
+                            <li class="fragment">BLAKE3</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Hashing</span>
+                            Na Criptografia Assimétrica
+                        </h4>
+                        <p>
+                            Assinaturas digitais
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Hashing</span>
+                            Na Criptografia Simétrica
+                        </h4>
+                        <p>
+                            HMAC:
+                            <b>Hash-based Message Authentication Code</b>
+                        </p>
+                    </section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h4>
+                            <span>Hashing</span>
+                            Integridade + Autenticidade
+                        </h4>
+                        <p>
+                            Apenas criptografar sem fazer o <em>hash</em> não é o suficiente, pois algum agente
+                            malicioso pode alterar a mensagem
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>
+                            <span>Hashing</span>
+                            Integridade + Autenticidade
+                        </h4>
+                        <h5>Hands-On</h5>
+                        <p>
+                            Executar script <code class="small">scripts/php/encrypt-without-hash.php</code>
+                        </p>
+                    </section>
+                </section>
+                <!-- Hashing -->
+
+                <!-- Armazenamento de Senhas -->
+                <section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h2>Armazenamento de Senhas</h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>Armazenamento de Senhas</h2>
+                        <p>Você deve usar algoritmos de <em>hashing</em> ao invés de encriptação</p>
+                        <p class="fragment">Em ordem de recomendação:</p>
+                        <ol>
+                            <li class="fragment">Argon2ID</li>
+                            <li class="fragment">bcrypt</li>
+                            <li class="fragment">PBKDF2</li>
+                        </ol>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Armazenamento de Senhas</span>
+                            Exemplo
+                        </h3>
+                        <pre><code class="php" data-line-numbers data-trim>
+                            // Para salvar
+                            public function setPassword(string $password): string {
+                                return \password_hash($password, PASSWORD_ARGON2ID);
+                            }
+
+                            // Para verificar
+                            public function checkPassword(User $user, string $password): bool {
+                                return \password_verify($password, $user->getPassword());
+                            }
+                        </code></pre>
+                        <a href="https://www.php.net/manual/en/function.password-hash.php" target="_blank"
+                           rel="noopener" class="smaller">
+                            PHP
+                        </a>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Armazenamento de Senhas</span>
+                            Exemplo
+                        </h3>
+                        <pre><code class="php" data-line-numbers data-trim>
+                            const argon2 = require('argon2');
+
+                            try {
+                                // Para salvar
+                                const hash = await argon2.hash(
+                                    password,
+                                    { type: argon2.argon2id }
+                                );
+
+                                // Para verificar
+                                if (await argon2.verify(hash, password)) {
+                                    // ...
+                                }
+                            } catch (err) {
+                                // algum erro
+                            }
+                        </code></pre>
+                        <a href="https://www.npmjs.com/package/argon2" target="_blank" rel="noopener" class="smaller">
+                            Node.js <span class="smaller">(pacote argon2)</span>
+                        </a>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Armazenamento de Senhas</span>
+                            Bibliotecas e leitura
+                        </h3>
+                        <ul>
+                            <li>
+                                <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+                                   target="_blank" rel="noopener">
+                                    Password Storage Cheat Sheet
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://crackstation.net/hashing-security.htm" target="_blank" rel="noopener">
+                                    Secure Salted Password Hashing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/defuse/password-hashing" target="_blank" rel="noopener">
+                                    <code>defuse/password-hashing</code>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+                <!-- Armazenamento de Senhas -->
+
+                <!-- OTP -->
+                <section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h2>OTP</h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h2>OTP</h2>
+                        <p>
+                            <b>One-Time Password</b> é um método de autenticação multifator <em>(MFA)</em> em que uma
+                            senha é gerada e só pode ser utilizada uma única vez, sendo depois descartada
+                        </p>
+                        <p class="fragment">
+                            Com esse descarte, ela é invulnerável a ataques de <em>replay</em>
+                            <span class="fragment"> -
+                                ou seja, uma senha já utilizada anteriormente não pode ser mais fornecida no sistema
+                            </span>
+                        </p>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>OTP</span>
+                            Via mensagens
+                        </h3>
+                        <p>
+                            O servidor gera um <em>OTP</em> e envia para um dispositivo cadastrado do cliente <em>(SMS,
+                            WhatsApp ou Telegram, por exemplo)</em>, que deve informar de volta para o serviço
+                        </p>
+                        <p class="fragment">
+                            Nesse caso, o cliente atua apenas como <em>recebedor</em>
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>
+                            <span>OTP</span>
+                            HOTP
+                        </h3>
+                        <p>
+                            <b>HMAC-based One-time Password</b> é uma OTP baseada em HMAC que utiliza de um contador
+                            como propriedade dinâmica
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>
+                            <span>OTP</span>
+                            HOTP
+                        </h3>
+                        <div class="text-center">
+                            <p class="fragment">
+                                O servidor gera uma chave secreta, define um contador, o algoritmo de
+                                <em>hashing <span class="smaller">(geralmente SHA1)</span></em>  e
+                                o tamanho da senha <em class="smaller">(geralmente 6 dígitos)</em>
+                            </p>
+                            <p class="fragment">&#8595;</p>
+                            <p class="fragment">
+                                O cliente usa um autenticador
+                                <em class="smallish">(geralmente um dispositivo físico)</em> para cadastrar esses
+                                parâmetros
+                            </p>
+                            <p class="fragment">&#8595;</p>
+                            <p class="fragment">
+                                Cada vez que uma senha é requisitada, tanto o servidor quanto o cliente incrementam o
+                                contador
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>OTP</span>
+                            HOTP
+                        </h3>
+                        <figure class="text-center">
+                            <img src="https://www.iperiusbackup.net/wp-content/uploads/2021/03/imagem13.png"
+                                 alt="HOTP" class="my-0" style="max-width: 80%;">
+                            <figcaption>
+                                <a href="https://www.onelogin.com/learn/otp-totp-hotp"
+                                   target="_blank" rel="noopener" class="smallest">
+                                    onelogin.com
+                                </a>
+                            </figcaption>
+                        </figure>
+                    </section>
+                    <section data-auto-animate data-auto-animate-restart>
+                        <h3>
+                            <span>OTP</span>
+                            TOTP
+                        </h3>
+                        <p>
+                            <b>Time-based One-Time Password</b> é uma OTP baseada em tempo, utilizando o horário atual
+                            como o fator de mudança
+                        </p>
+                        <p class="fragment">
+                            O total de tempo válido para cada senha é chamado de <em>step</em>, sendo geralmente 30
+                            segundos, e após esse tempo deve-se gerar uma nova
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>
+                            <span>OTP</span>
+                            TOTP
+                        </h3>
+                        <p>
+                            Para evitar possíveis descompassos entre o horário do gerador e do verificador, também são
+                            permitidos "janelas":
+                        </p>
+                        <ul class="margin">
+                            <li class="fragment">
+                                O verificador checa a senha utilizando o horário atual
+                            </li>
+                            <li class="fragment">
+                                Se não funcionar, testa com <code>horário atual - step</code>
+                                <em class="smaller">(ou seja, com o horário de 30 segundos atrás)</em>
+                            </li>
+                            <li class="fragment">
+                                O processo anterior pode ser repetido N vezes
+                            </li>
+                            <li class="fragment">
+                                Se ainda não funcionar, testa com <code>horário atual + step</code>
+                                <em class="smaller">(ou seja, com o horário de 30 segundos à frente)</em>
+                            </li>
+                            <li class="fragment">
+                                O processo anterior pode ser repetido N vezes
+                            </li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>
+                            <span>OTP</span>
+                            TOTP
+                        </h3>
+                        <div class="text-center">
+                            <p class="fragment">
+                                O servidor gera uma chave secreta, o algoritmo de
+                                <em>hashing <span class="smaller">(geralmente SHA1)</span></em>  e
+                                o tamanho da senha <em class="smaller">(geralmente 6 dígitos)</em>
+                            </p>
+                            <p class="fragment">&#8595;</p>
+                            <p class="fragment">
+                                O cliente utiliza um aplicativo autenticador
+                                <em class="smaller">(como o Google Authenticator)</em>
+                                para cadastrar esses parâmetros
+                            </p>
+                            <p class="fragment">&#8595;</p>
+                            <p class="fragment">
+                                Toda vez que você abre o aplicativo, as senhas são geradas a partir do horário atual
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>
+                            <span>OTP</span>
+                            TOTP
+                        </h3>
+                        <figure class="text-center">
+                            <img src="https://www.iperiusbackup.net/wp-content/uploads/2021/03/imagem22.png"
+                                 alt="TOTP" class="my-0" style="max-width: 80%;">
+                            <figcaption>
+                                <a href="https://www.onelogin.com/learn/otp-totp-hotp"
+                                   target="_blank" rel="noopener" class="smallest">
+                                    onelogin.com
+                                </a>
+                            </figcaption>
+                        </figure>
+                    </section>
+                </section>
+                <!-- OTP -->
+
+                <section>
+                    <section>
+                        <h3>
+                            <span>Referências</span>
+                            Bibliotecas
+                        </h3>
+                        <ul class="no-padding">
+                            <li>
+                                Multi-platforma e recomendada: <a href="https://doc.libsodium.org/" target="_blank" rel="noopener">
+                                    libsodium
+                                </a>
+                            </li>
+                            <li>
+                                Node.js:
+                                <a href="https://nodejs.org/api/crypto.html" target="_blank" rel="noopener">
+                                     módulo crypto
+                                </a>
+                            </li>
+                            <li>
+                                Node.js:
+                                <a href="https://www.npmjs.com/package/argon2" target="_blank" rel="noopener">
+                                    pacote argon2
+                                </a>
+                            </li>
+                            <li>
+                                Python:
+                                <a href="https://github.com/flamewow/argon2_py" target="_blank" rel="noopener">
+                                    pacote argon2
+                                </a>
+                            </li>
+                            <li>
+                                Go:
+                                <a href="https://github.com/tvdburgt/go-argon2" target="_blank" rel="noopener">
+                                    pacote argon2
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Referências</span>
+                            Ferramentas
+                        </h3>
+                        <ul class="no-padding">
+                            <li>
+                                <a href="https://www.metasploit.com/" target="_blank" rel="noopener">
+                                    Metasploit
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://w3af.org/" target="_blank" rel="noopener">
+                                    w3af
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://portswigger.net/burp" target="_blank" rel="noopener">
+                                    Burp Suite
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://pt-br.tenable.com/products/nessus" target="_blank" rel="noopener">
+                                    Nessus
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://www.openvas.org/" target="_blank" rel="noopener">
+                                    OpenVAS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.kali.org/" target="_blank" rel="noopener">
+                                    Kali Linux
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Referências</span>
+                            Leitura
+                        </h3>
+                        <ul>
+                            <li>
+                                <a href="https://en.wikipedia.org/wiki/Cryptanalysis" target="_blank" rel="noopener">
+                                    Wikipedia: Criptoanálise
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange"
+                                   target="_blank" rel="noopener">
+                                    Wikipedia: Diffie–Hellman key exchange
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://cheatsheetseries.owasp.org/" target="_blank" rel="noopener">
+                                    OWASP Cheat Sheet Series
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://csrc.nist.gov/publications/detail/fips/140/3/final" target="_blank"
+                                   rel="noopener">
+                                    FIPS 140-3
+                                    <span class="smaller">(Security Requirements for Cryptographic Modules)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://paragonie.com/" target="_blank" rel="noopener">
+                                    Paragon Initiative
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Referências</span>
+                            Modelos e Procedimentos
+                        </h3>
+                        <ul>
+                            <li>
+                                <a href="https://www.devsecops.org/" target="_blank" rel="noopener">
+                                    DevSecOps
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.bsimm.com/" target="_blank" rel="noopener">
+                                    BSIMM
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://pt.slideshare.net/few/basic-of-ssdlc/2" target="_blank" rel="noopener">
+                                    SSDLC
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>
+                            <span>Referências</span>
+                            Vulnerabilidades
+                        </h3>
+                        <ul>
+                            <li><a href="https://snyk.io/vuln" target="_blank" rel="noopener">snyk</a></li>
+                            <li><a href="https://cve.mitre.org/" target="_blank" rel="noopener">CVE - Mitre</a></li>
+                        </ul>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="reveal.js/dist/reveal.js"></script>
+        <script src="reveal.js/plugin/highlight/highlight.js"></script>
+        <script>
+            Reveal.initialize({
+                hash: true,
+                mouseWheel: true,
+                plugins: [RevealHighlight]
+            });
+        </script>
+    </body>
+</html>

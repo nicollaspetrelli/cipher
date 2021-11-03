@@ -1,0 +1,224 @@
+/*
+ * Theme
+ */
+:root {
+  --r-background-color: #fff;
+  --r-main-font: Open Sans, sans-serif;
+  --r-main-color: #5d5763;
+  --r-heading-font: Inter, sans-serif;
+  --r-heading-color: #271F30;
+  --r-heading-font-weight: 600;
+  --r-subheading-color: #938F98;
+  --r-subheading-font-weight: 500;
+  --r-main-font-size: 32px;
+  --r-heading-letter-spacing: -2px;
+  --r-heading-text-transform: none;
+  --r-code-font: "Liga Consolas", Consolas, monospace;
+  --r-link-color: #6369d1;
+  --r-link-color-dark: #5359c1;
+  --r-link-color-hover: #7379c1;
+}
+.reveal {
+  font-weight: 400;
+}
+.reveal h1 > span,
+.reveal h2 > span,
+.reveal h3 > span,
+.reveal h4 > span,
+.reveal h5 > span,
+.reveal h6 > span {
+  display: block;
+  color: var(--r-subheading-color);
+  font-weight: var(--r-subheading-font-weight);
+  font-size: 0.65em;
+  line-height: 1;
+}
+.reveal h1 {
+  letter-spacing: calc(var(--r-heading-letter-spacing) - 3px);
+}
+.reveal h6 {
+  font-size: 0.8em;
+}
+section > h2:first-child,
+section > h3:first-child,
+section > h4:first-child,
+section > h5:first-child,
+section > h6:first-child {
+  margin-bottom: 1em;
+}
+.reveal .controls {
+  bottom: 18px;
+  right: 18px;
+  font-size: 8px;
+}
+.reveal .controls button {
+  color: #838383;
+}
+.reveal .slides {
+  letter-spacing: var(--r-heading-letter-spacing);
+  overflow: hidden;
+  text-align: left;
+}
+.stack > section {
+  padding: 15px;
+  box-sizing: border-box;
+}
+.reveal code {
+  letter-spacing: 0;
+}
+.reveal blockquote {
+  background-color: #fbfbfb;
+  margin-left: 0;
+  padding: 5px 15px;
+  box-shadow: none;
+}
+
+/*
+ * Componentes
+ */
+.text-center,
+table.text-center th,
+table.text-center td {
+  text-align: center !important;
+}
+.reveal table tr th {
+  border-bottom-color: #bbb;
+}
+.reveal table tr td {
+  border-bottom-color: #ddd;
+}
+.reveal table tr.fragment:not(.visible) th,
+.reveal table tr.fragment:not(.visible) td {
+  border-bottom: 0;
+}
+.align-items-center {
+  align-items: center;
+}
+code:not(.hljs):not(.plain) {
+  font-size: 0.7em;
+  background-color: #fafafa;
+  color: burlywood;
+  padding: 0.3em 0.4em;
+  vertical-align: middle;
+}
+a > code:not(.hljs):not(.plain) {
+  color: var(--r-link-color);
+}
+pre {
+  scrollbar-width: thin;
+}
+pre[class*="language-"] {
+  border: 0;
+  box-shadow: none;
+  font-size: 1.2rem;
+}
+pre.code-wrapper {
+  margin-left: 0;
+}
+pre.code-wrapper + p {
+  font-size: 0.8em;
+}
+code[class*="language-"] {
+  border: 0 !important;
+  text-shadow: none;
+}
+p > code[class*="language-"] {
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+div.block {
+  border: 2px #ccc solid;
+  padding: 0.35em 0.3em;
+  box-sizing: border-box;
+}
+div.one-third {
+  float: left;
+  width: 31.333333%;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+#flow-cipher {
+  font-size: 2em;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.smaller {
+  font-size: 0.8em;
+}
+blockquote.small {
+  font-size: 0.7em;
+}
+.smallish {
+  font-size: 0.9em;
+}
+.small {
+  font-size: 0.6em;
+}
+.smallest {
+  font-size: 0.45em;
+}
+.text-white {
+  color: #fff !important;
+}
+.line-height-1 {
+  line-height: 1;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.d-flex {
+  display: flex;
+}
+.align-start {
+  align-items: start;
+}
+.d-flex.half-columns > div {
+  flex-basis: 50%;
+  padding: 0 0.5em;
+  box-sizing: border-box;
+}
+.d-flex.one-third-columns > div {
+  flex-basis: 33%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.my-2 {
+  margin-top: 2em !important;
+  margin-bottom: 2em !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-1 {
+  margin-bottom: 1em !important;
+}
+.mr-1 {
+  margin-right: 1em !important;
+}
+.my-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.margin > li {
+  margin-bottom: 15px;
+}
+.reveal .slides section .fragment.highlight-strikethrough {
+  opacity: 1;
+  visibility: inherit;
+}
+.reveal .slides section .fragment.highlight-strikethrough.visible {
+  text-decoration: line-through;
+  color: #999;
+}
+.opacity-0 {
+  opacity: 0;
+}
+.reveal svg + h4 {
+  color: var(--r-main-color);
+}
+svg [fill="#888"] {
+  fill: var(--r-main-color);
+}

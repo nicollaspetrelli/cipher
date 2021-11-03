@@ -1,0 +1,15 @@
+{
+  "name": "workshop-criptografia",
+  "version": "0.0.1",
+  "description": "Workshop de criptografia",
+  "main": "index.js",
+  "author": "Vinícius Campitelli",
+  "license": "ISC",
+  "homepage": "https://viniciuscampitelli.com/",
+  "dependencies": {
+    "argon2-ffi": "^2.0.0",
+    "crypto": "^1.0.1",
+    "otplib": "^12.0.1",
+    "readline": "^1.3.0"
+  }
+}

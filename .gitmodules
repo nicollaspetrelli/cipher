@@ -1,0 +1,6 @@
+[submodule "reveal.js"]
+	path = reveal.js
+	url = git@github.com:hakimel/reveal.js.git
+[submodule "scripts/php/libsodium-php"]
+	path = scripts/php/libsodium-php
+	url = git@github.com:vcampitelli/slides-libsodium-php.git

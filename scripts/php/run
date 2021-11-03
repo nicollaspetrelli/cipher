@@ -1,0 +1,24 @@
+#!/bin/bash
+if [ ! -f "./libsodium-php/README.md" ]; then
+  git submodule update --init libsodium-php
+fi
+
+CONTAINER_NAME="workshop-criptografia-php"
+
+HAS_CONTAINER=$(docker ps --filter "name=${CONTAINER_NAME}" --format ".")
+if [ "${HAS_CONTAINER}" == "." ]; then
+    # Container está rodando
+    docker exec -it ${CONTAINER_NAME} sh
+else
+    # Container não está rodando
+    docker restart $CONTAINER_NAME 2>/dev/null && docker exec -it $CONTAINER_NAME sh 2>/dev/null
+    # Container não existe
+    if [ $? -ne 0 ]; then
+      docker inspect --type=image "${CONTAINER_NAME}" > /dev/null 2>&1
+      # Imagem não existe
+      if [ $? -ne 0 ]; then
+        docker build -t ${CONTAINER_NAME} .
+      fi
+      docker run -it --rm -v ${PWD}:/app --name ${CONTAINER_NAME} ${CONTAINER_NAME} sh
+    fi
+fi
